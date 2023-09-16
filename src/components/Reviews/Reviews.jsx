@@ -29,7 +29,7 @@ const Reviews = () => {
   return (
     <div>
       {loader && <Loader />}
-      {reviews.length >= 0 ? (
+      {reviews.length > 0 ? (
         reviews.map(({ author, content, id }) => {
           return (
             <li key={id}>

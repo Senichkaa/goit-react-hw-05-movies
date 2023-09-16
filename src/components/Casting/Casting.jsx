@@ -5,7 +5,7 @@ import { Loader } from 'components/Loader/Loader';
 import { movieCastRequest } from 'components/fetch-api';
 
 const Casting = () => {
-  const [casting, setCasting] = useState(null);
+  const [cast, setCast] = useState(null);
   const [loader, setLoader] = useState(false);
   const { movieId } = useParams();
 
@@ -15,7 +15,7 @@ const Casting = () => {
     const fetching = async () => {
       try {
         const resp = await movieCastRequest(movieId);
-        setCasting(resp.casting);
+        setCast(resp.cast);
       } catch (error) {
         console.error('There is an error', error);
       } finally {
@@ -29,8 +29,8 @@ const Casting = () => {
   return (
     <div>
       {loader && <Loader />}
-      {casting &&
-        casting.map(({ profile_path, name, id, character }) => {
+      {cast &&
+        cast.map(({ profile_path, name, id, character }) => {
           return (
             <li key={id}>
               <img

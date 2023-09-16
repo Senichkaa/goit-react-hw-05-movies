@@ -48,7 +48,7 @@ const MovieDetails = () => {
           )}
           <div>
             <h2>{query.title}</h2>
-            <h2>Score: {Math.round(query.vote_average * 10)}%</h2>
+            <h2>Rating: {Math.round(query.vote_average * 10)}%</h2>
             <h3>Overview</h3>
             <p>{query.overview}</p>
             <h3>Genres</h3>
