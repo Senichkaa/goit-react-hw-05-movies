@@ -58,7 +58,7 @@ const MovieDetails = () => {
       )}
       <div>
         <h2>Additional</h2>
-        <MovieInfo></MovieInfo>
+        <MovieInfo />
       </div>
       <Suspense fallback={<div>Loading</div>}>
         <Outlet />
