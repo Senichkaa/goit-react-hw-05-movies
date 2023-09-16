@@ -1,8 +1,9 @@
 import { ProgressBar } from 'react-loader-spinner';
+import { LoaderWrapper } from './Loader.styled';
 
 export const Loader = () => {
   return (
-    <>
+    <LoaderWrapper>
       <ProgressBar
         height="80"
         width="80"
@@ -12,6 +13,6 @@ export const Loader = () => {
         borderColor="#F4442E"
         barColor="#51E5FF"
       />
-    </>
+    </LoaderWrapper>
   );
 };

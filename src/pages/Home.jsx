@@ -3,7 +3,15 @@ import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Loader } from 'components/Loader/Loader';
 import { trendingRequest } from 'components/fetch-api';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
+
+import {
+  Trends,
+  Loading,
+  ReactLink,
+  MovieLi,
+  TrendsWrapper,
+} from './Home.styled';
 
 const Home = () => {
   const [images, setImages] = useState(null);
@@ -28,24 +36,24 @@ const Home = () => {
   }, []);
 
   return (
-    <div>
+    <TrendsWrapper>
       <div>
-        <h1>Trends</h1>
+        <Trends>Trends</Trends>
       </div>
 
       {loader && <Loader />}
       {images !== null ? (
         images.map(({ id, title }) => (
-          <li key={id}>
-            <Link to={`movies/${id}`} state={{ form: location }}>
+          <MovieLi key={id}>
+            <ReactLink to={`movies/${id}`} state={{ form: location }}>
               {title}
-            </Link>
-          </li>
+            </ReactLink>
+          </MovieLi>
         ))
       ) : (
-        <p>Loading...</p>
+        <Loading>Loading...</Loading>
       )}
-    </div>
+    </TrendsWrapper>
   );
 };
 

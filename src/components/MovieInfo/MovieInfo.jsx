@@ -1,13 +1,13 @@
-import { Link } from 'react-router-dom';
+import { AdditionalLink, AdditionalLi } from './MovieInfo.styled';
 export const MovieInfo = () => {
   return (
     <ul>
-      <li>
-        <Link to="cast">Cast</Link>
-      </li>
-      <li>
-        <Link to="reviews">Reviews</Link>
-      </li>
+      <AdditionalLi>
+        <AdditionalLink to="cast">Cast</AdditionalLink>
+      </AdditionalLi>
+      <AdditionalLi>
+        <AdditionalLink to="reviews">Reviews</AdditionalLink>
+      </AdditionalLi>
     </ul>
   );
 };

@@ -2,12 +2,23 @@ import React from 'react';
 import { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { Outlet } from 'react-router-dom';
 import { movieDetailsRequest } from 'components/fetch-api';
 import { Suspense } from 'react';
 import { Loader } from 'components/Loader/Loader';
 import { MovieInfo } from 'components/MovieInfo/MovieInfo';
+
+import { Loading } from './Home.styled';
+import {
+  DetailsWrapper,
+  BackButton,
+  InfoWrapper,
+  MainDetails,
+  AddInfo,
+  Overview,
+  Genres,
+} from './MovieDetails.styled';
 
 const MovieDetails = () => {
   const [query, setQuery] = useState(null);
@@ -34,11 +45,11 @@ const MovieDetails = () => {
   }, [movieId]);
 
   return (
-    <div>
-      <Link to={backLink.current}>Back</Link>
+    <InfoWrapper>
+      <BackButton to={backLink.current}>Back</BackButton>
       {loader && <Loader />}
       {query && (
-        <div>
+        <DetailsWrapper>
           {query.poster_path && (
             <img
               src={`https://image.tmdb.org/t/p/w500${query.poster_path}`}
@@ -47,23 +58,25 @@ const MovieDetails = () => {
             />
           )}
           <div>
-            <h2>{query.title}</h2>
-            <h2>Rating: {Math.round(query.vote_average * 10)}%</h2>
-            <h3>Overview</h3>
-            <p>{query.overview}</p>
-            <h3>Genres</h3>
-            <p>{query.genres.map(genre => genre.name).join(',')}</p>
+            <MainDetails>{query.title}</MainDetails>
+            <MainDetails>
+              Rating: {Math.round(query.vote_average * 10)}%
+            </MainDetails>
+            <AddInfo>Overview</AddInfo>
+            <Overview>{query.overview}</Overview>
+            <AddInfo>Genres</AddInfo>
+            <Genres>{query.genres.map(genre => genre.name).join(', ')}</Genres>
           </div>
-        </div>
+        </DetailsWrapper>
       )}
-      <div>
-        <h2>Additional</h2>
+      <DetailsWrapper>
+        <MainDetails>Additional</MainDetails>
         <MovieInfo />
-      </div>
-      <Suspense fallback={<div>Loading</div>}>
+      </DetailsWrapper>
+      <Suspense fallback={<Loading>Loading</Loading>}>
         <Outlet />
       </Suspense>
-    </div>
+    </InfoWrapper>
   );
 };
 

@@ -4,6 +4,8 @@ import { useParams } from 'react-router-dom';
 import { Loader } from 'components/Loader/Loader';
 import { movieCastRequest } from 'components/fetch-api';
 
+import { CastActor, CastCharacter } from './Casting.styled';
+
 const Casting = () => {
   const [cast, setCast] = useState(null);
   const [loader, setLoader] = useState(false);
@@ -40,10 +42,10 @@ const Casting = () => {
                     : 'https://ireland.apollo.olxcdn.com/v1/files/0iq0gb9ppip8-UA/image;s=1000x700'
                 }
                 alt={name}
-                width={150}
+                width={200}
               />
-              <p>{name}</p>
-              <p>character: {character}</p>
+              <CastActor>{name}</CastActor>
+              <CastCharacter>Character: {character}</CastCharacter>
             </li>
           );
         })}

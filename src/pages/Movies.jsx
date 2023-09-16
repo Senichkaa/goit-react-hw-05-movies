@@ -1,9 +1,12 @@
 import { useLocation, useSearchParams } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { searchMovieRequest } from 'components/fetch-api';
 import { SearchMovieForm } from 'components/SearchMovieForm/SearchMovieForm';
 import { Loader } from 'components/Loader/Loader';
+
+import { Loading, TrendsWrapper } from './Home.styled';
+import { MovieLi, ReactLink, SearchFormWrapper } from './Movies.styled';
 
 const Movies = () => {
   const [query, setQuery] = useState([]);
@@ -39,21 +42,23 @@ const Movies = () => {
 
   return (
     <div>
-      <div>
+      <SearchFormWrapper>
         <SearchMovieForm onChange={updateQuery}></SearchMovieForm>
-      </div>
-      {loader && <Loader />}
-      {query !== null ? (
-        query.map(({ id, title }) => (
-          <li key={id}>
-            <Link to={`${id}`} state={{ form: location }}>
-              {title}
-            </Link>
-          </li>
-        ))
-      ) : (
-        <p>Loading...</p>
-      )}
+      </SearchFormWrapper>
+      <TrendsWrapper>
+        {loader && <Loader />}
+        {query !== null ? (
+          query.map(({ id, title }) => (
+            <MovieLi key={id}>
+              <ReactLink to={`${id}`} state={{ form: location }}>
+                {title}
+              </ReactLink>
+            </MovieLi>
+          ))
+        ) : (
+          <Loading>Loading...</Loading>
+        )}
+      </TrendsWrapper>
     </div>
   );
 };

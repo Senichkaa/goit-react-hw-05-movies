@@ -4,6 +4,8 @@ import { useParams } from 'react-router-dom';
 import { movieReviewsRequest } from 'components/fetch-api';
 import { Loader } from 'components/Loader/Loader';
 
+import { ReviewLi, ReviewInfo, ReviewAuthor, SorryP } from './Reviews.styled';
+
 const Reviews = () => {
   const [reviews, setReviews] = useState([]);
   const [loader, setLoader] = useState(false);
@@ -32,14 +34,14 @@ const Reviews = () => {
       {reviews.length > 0 ? (
         reviews.map(({ author, content, id }) => {
           return (
-            <li key={id}>
-              <h3>Author:{author}</h3>
-              <p>{content}</p>
-            </li>
+            <ReviewLi key={id}>
+              <ReviewAuthor>Author: {author}</ReviewAuthor>
+              <ReviewInfo>{content}</ReviewInfo>
+            </ReviewLi>
           );
         })
       ) : (
-        <p>Sorry, we do not have any information about it</p>
+        <SorryP>Sorry, we do not have any information about it :/ </SorryP>
       )}
     </div>
   );
