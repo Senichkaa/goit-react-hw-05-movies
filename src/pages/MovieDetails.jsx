@@ -5,7 +5,7 @@ import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { Outlet } from 'react-router-dom';
 import { movieDetailsRequest } from 'components/fetch-api';
-// import { Suspense } from 'react';
+import { Suspense } from 'react';
 import { Loader } from 'components/Loader/Loader';
 import { MovieInfo } from 'components/MovieInfo/MovieInfo';
 
@@ -21,8 +21,8 @@ const MovieDetails = () => {
 
     const fetching = async () => {
       try {
-        const resp = await movieDetailsRequest();
-        setQuery(resp.results);
+        const resp = await movieDetailsRequest(movieId);
+        setQuery(resp);
       } catch (error) {
         console.error('There is an error', error);
       } finally {
@@ -60,7 +60,9 @@ const MovieDetails = () => {
         <h2>Additional</h2>
         <MovieInfo></MovieInfo>
       </div>
-      <Outlet />
+      <Suspense fallback={<div>Loading</div>}>
+        <Outlet />
+      </Suspense>
     </div>
   );
 };

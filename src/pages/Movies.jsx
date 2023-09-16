@@ -17,7 +17,7 @@ const Movies = () => {
     setLoader(true);
     const fetching = async () => {
       try {
-        const resp = await searchMovieRequest();
+        const resp = await searchMovieRequest(movie);
         setQuery(resp.results);
       } catch (error) {
         console.error('There is an error', error);
